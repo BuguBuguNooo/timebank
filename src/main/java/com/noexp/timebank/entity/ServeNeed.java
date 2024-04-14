@@ -1,5 +1,7 @@
 package com.noexp.timebank.entity;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -14,24 +16,39 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class ServeNeed {
-    // 服务需求的ID
+    // 服务需求的ID：举例：1
+    @NotNull
     private int needId;
-    // 服务需求的时间长度
+    // 服务时长：举例：2小时
+    @NotEmpty
     private Date time;
-    // 服务需求的标题
+    // 服务需求的标题：举例：帮忙搬家
+    @NotEmpty
     private String content;
-    // 服务需求的详细描述
+    // 服务需求的详细描述：举例：帮忙搬家，家里有一些家具需要搬到新家，需要帮忙的朋友联系我
+    @NotEmpty
     private String details;
-    // 服务需求的发起者ID
+    // 服务需求的发起者ID：举例：1
+    @NotNull
     private int userId;
+    // 服务的需求时间范围：举例：2021-06-01 12:00:00到2021-06-01 14:00:00
+    @NotEmpty
     private String duration;
-    // 服务需求的地点
+    // 服务需求的地点：举例：北京市海淀区中关村
+    @NotEmpty
     private String location;
-    // 服务需求的提交时间
+    // 服务需求的提交时间：举例：2021-06-01 10:00:00
+    @NotEmpty
     private Date submitTime;
+    // 服务需求的属性：举例：搬家
+    @NotEmpty
     private String attribute;
-    // 服务需求的状态
+    // 服务需求的状态：有审核中、待接受、已接受、已完成、已取消、已过期等状态
+    @NotEmpty
     private int status;
-    private String application;
+    // 配图：举例：图片的URL
+    private String needPic;
+    // 服务需求的赏金：举例：10$
+    @NotEmpty
     private double account;
 }
