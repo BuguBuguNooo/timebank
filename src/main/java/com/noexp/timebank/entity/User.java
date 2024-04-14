@@ -45,5 +45,5 @@ public class User {
     //用户地址
     private String location;
     //用户身份证号
-    private  String idNumber;
+    private  String idCard;
 }
