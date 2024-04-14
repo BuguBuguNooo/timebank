@@ -12,16 +12,12 @@ public class UserSexValidation implements ConstraintValidator<UserSex, String> {
     /**
      *
      * @param s 传入的校验数据
-     * @param constraintValidatorContext
      * @return true:校验通过 false:校验失败
      */
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
         //校验逻辑
-        if ("男".equals(s) || "女".equals(s) || "保密".equals(s)) {
-            return true;
-        }
-        return false;
+        return "男".equals(s) || "女".equals(s) || "保密".equals(s);
     }
 }
