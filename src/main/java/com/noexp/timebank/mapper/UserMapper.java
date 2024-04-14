@@ -30,4 +30,7 @@ public interface UserMapper {
     //更改用户类型
     @Update("update User set role=#{role}, update_time=now() where user_id=#{userId}")
     int updateRole(String role, Integer userId);
+    //根据用户ID查看账户信息
+    @Select("select account from User where user_id=#{userId}")
+    Double findAccountByUserId(Integer userId);
 }

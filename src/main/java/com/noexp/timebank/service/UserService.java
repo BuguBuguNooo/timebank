@@ -18,4 +18,6 @@ public interface UserService {
     void updatePwd(String password);
     //更改用户类型
     int updateRole(String role, Integer userId);
+    //根据用户ID查看账户信息
+    Double findAccountByUserId(Integer userId);
 }

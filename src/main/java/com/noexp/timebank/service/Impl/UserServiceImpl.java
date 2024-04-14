@@ -65,4 +65,9 @@ public class UserServiceImpl implements UserService {
     public int updateRole(String role, Integer userId) {
         return userMapper.updateRole(role, userId);
     }
+
+    @Override
+    public Double findAccountByUserId(Integer userId) {
+        return userMapper.findAccountByUserId(userId);
+    }
 }

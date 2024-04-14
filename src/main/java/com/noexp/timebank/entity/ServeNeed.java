@@ -1,5 +1,6 @@
 package com.noexp.timebank.entity;
 
+import com.noexp.timebank.annotation.ServeStatus;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -43,6 +44,7 @@ public class ServeNeed {
     @NotEmpty
     private String attribute;
     // 服务需求的状态：有审核中、待接受、已接受、已完成、已取消、已过期等状态
+    @ServeStatus
     private String status;
     // 配图：举例：图片的URL
     private String needPic;

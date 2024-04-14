@@ -42,7 +42,19 @@
     </select>
 
     <update id="updateServeNeed" parameterType="com.noexp.timebank.entity.ServeNeed">
-        update timebank.ServeNeed set user_id = #{userId}, content = #{content}, details = #{details}, start_time = #{startTime}, end_time = #{endTime}, status = #{status}, time = #{time}, submit_time = #{submitTime}, location = #{location}, attribute = #{attribute}, need_pic = #{needPic}, account = #{account}
+        update timebank.ServeNeed
+        set user_id = #{userId},
+            content = #{content},
+            details = #{details},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            status = DEFAULT,
+            time = #{time},
+            submit_time = now(),
+            location = #{location},
+            attribute = #{attribute},
+            need_pic = #{needPic},
+            account = #{account}
         where need_id = #{needId}
     </update>
 
@@ -65,4 +77,10 @@
     <select id="selectServeNeedsBySubmitTimeRange" resultMap="ServeNeedResultMap" parameterType="java.util.Date">
         select * from timebank.ServeNeed where submit_time between #{startTime} and #{endTime}
     </select>
+
+    <update id="updateServeNeedStatus" parameterType="com.noexp.timebank.entity.ServeNeed">
+        update timebank.ServeNeed
+        set status = #{status}
+        where need_id = #{needId}
+    </update>
 </mapper>

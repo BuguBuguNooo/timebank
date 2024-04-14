@@ -90,5 +90,6 @@ public interface ServeNeedMapper {
      */
     List<ServeNeed> selectServeNeedsByAccountRange(@Param("minAccount") double minAccount, @Param("maxAccount") double maxAccount);
 
-    // 可以根据实际需求继续添加其他查询、更新、删除等方法
+    // 修改服务需求的状态
+    int updateServeNeedStatus(@Param("needId") int needId, @Param("status") String status);
 }

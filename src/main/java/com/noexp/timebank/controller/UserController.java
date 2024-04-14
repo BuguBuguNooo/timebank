@@ -137,4 +137,12 @@ public class UserController {
             }
         }
     }
+
+    //根据用户ID查看账户信息
+    @GetMapping("/findAcByUserId")
+    public Result<Double> findAccountByUserId(){
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer userId = (Integer) map.get("userId");
+        return Result.success(userService.findAccountByUserId(userId));
+    }
 }

@@ -1,8 +1,10 @@
 package com.noexp.timebank.controller;
 
+import com.noexp.timebank.annotation.ServeStatus;
 import com.noexp.timebank.entity.Result;
 import com.noexp.timebank.entity.ServeNeed;
 import com.noexp.timebank.service.ServeNeedService;
+import com.noexp.timebank.util.ThreadLocalUtil;
 import jakarta.validation.Valid;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author gefangjie
@@ -33,7 +36,7 @@ public class ServeNeedController {
     }
     //更新服务需求
     @PatchMapping("/updateServeNeed")
-    public Result<String> updateServeNeed(@Validated ServeNeed serveNeed){
+    public Result<String> updateServeNeed(@Validated @RequestBody ServeNeed serveNeed){
         int i = serveNeedService.updateServeNeed(serveNeed);
         if(i == 1){
             return Result.success("服务需求更新成功!");
@@ -94,6 +97,25 @@ public class ServeNeedController {
     @GetMapping("/getServeNeedsBySubmitTime")
     public Result<List<ServeNeed>> getServeNeedsBySubmitTime(@Validated Date startTime,@Validated Date endTime){
         return Result.success(serveNeedService.getServeNeedsByTime(startTime, endTime));
+    }
+
+    //管理员可修改服务需求状态：进行审核
+    @PatchMapping("/updateServeNeedStatus")
+    public Result<String> updateServeNeedStatus(@RequestParam @Validated @ServeStatus String status, @RequestParam @Validated int needId){
+        //查看当前用户是否为管理员
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String userRole = (String) map.get("role");
+        if (!"管理员".equals(userRole)){
+            return Result.error("权限不足");
+        } else {
+            //更新服务需求状态
+            int i = serveNeedService.updateServeNeedStatus(status, needId);
+            if(i == 1){
+                return Result.success("服务需求状态更新成功!");
+            } else {
+                return Result.error("服务需求状态更新失败!");
+            }
+        }
     }
 
 }

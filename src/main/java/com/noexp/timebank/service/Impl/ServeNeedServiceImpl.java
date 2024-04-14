@@ -65,4 +65,9 @@ public class ServeNeedServiceImpl implements ServeNeedService {
     public List<ServeNeed> getServeNeedsByTime(Date startTime, Date endTime) {
         return serveNeedMapper.selectServeNeedsBySubmitTimeRange(startTime, endTime);
     }
+
+    @Override
+    public int updateServeNeedStatus(String status, int needId) {
+        return serveNeedMapper.updateServeNeedStatus(needId, status);
+    }
 }

@@ -22,9 +22,9 @@ class ServeNeedControllerTest {
         //生成20个随机的服务需求
         // 创建一个表示时间的 java.sql.Time 对象
         Time time = Time.valueOf("02:00:00");
-        for (int i = 0; i < 20; i++) {
+        for (int i = 21; i < 40; i++) {
             ServeNeed serveNeed = new ServeNeed();
-            serveNeed.setUserId(1);
+            serveNeed.setUserId(2);
             serveNeed.setTime(time);
             serveNeed.setContent("服务需求" + i);
             serveNeed.setDetails("服务需求内容" + i);

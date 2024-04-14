@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 /**
  * @author gefangjie
@@ -48,4 +49,6 @@ public class User {
     private String location;
     //用户身份证号
     private  String idCard;
+    //用户账户余额
+    private BigDecimal account;
 }

@@ -29,4 +29,6 @@ public interface ServeNeedService {
     List<ServeNeed> getServeNeedsByLocation(String location);
     //根据服务需求的时间查询服务需求
     List<ServeNeed> getServeNeedsByTime(Date startTime, Date endTime);
+    //修改服务需求状态
+    int updateServeNeedStatus(String status, int needId);
 }
