@@ -59,4 +59,10 @@ public class UserServiceImpl implements UserService {
         //根据用户id更新密码
         userMapper.updatePwd(md5String, id);
     }
+
+    //更改用户类型
+    @Override
+    public int updateRole(String role, Integer userId) {
+        return userMapper.updateRole(role, userId);
+    }
 }

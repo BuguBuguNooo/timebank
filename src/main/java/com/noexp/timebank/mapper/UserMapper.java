@@ -19,11 +19,15 @@ public interface UserMapper {
             " values(#{username}, #{password}, now(), now())")
     void add(String username, String password);
     //更新用户信息
-    @Update("update User set nickname=#{nickname},id_card=#{idCard}, location=#{location}, phone=#{phone}, email=#{email}, update_time=#{updateTime} where user_id=#{userId}")
+    @Update("update User set nickname=#{nickname},sex=#{sex}, id_card=#{idCard}, location=#{location}, phone=#{phone}, email=#{email}, update_time=#{updateTime} where user_id=#{userId}")
     void update(User user);
     //更新头像
-    @Update("update User set user_pic=#{avatatUrl}, update_time=now() where user_id=#{userId}")
+    @Update("update User set user_pic=#{userPic}, update_time=now() where user_id=#{userId}")
     void updateAvatarUrl(String userPic,Integer userId);
+    //更新密码
     @Update("update User set password=#{md5String}, update_time=now() where user_id=#{userId}")
     void updatePwd(String md5String, Integer userId);
+    //更改用户类型
+    @Update("update User set role=#{role}, update_time=now() where user_id=#{userId}")
+    int updateRole(String role, Integer userId);
 }

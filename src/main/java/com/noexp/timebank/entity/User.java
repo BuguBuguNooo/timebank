@@ -1,6 +1,7 @@
 package com.noexp.timebank.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.noexp.timebank.annotation.UserRole;
 import com.noexp.timebank.annotation.UserSex;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -26,6 +27,7 @@ public class User {
     @Pattern(regexp = "^\\S{1,10}$")
     private String nickname;
     //角色:普通用户，管理员, 超级管理员
+    @UserRole
     private String role;
     //性别:男，女, 保密
     @UserSex
