@@ -1,26 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.noexp.timebank.mapper.ServeNeedMapper">
 <!--    resultMap定义了如何从数据库结果集中来加载对象。-->
     <resultMap id="ServeNeedResultMap" type="com.noexp.timebank.entity.ServeNeed">
-        <id column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <id column="id" property="needId" jdbcType="INTEGER" javaType="java.lang.Integer" />
         <result column="user_id" property="userId" jdbcType="INTEGER" javaType="java.lang.Integer" />
-        <result column="title" property="title" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="content" property="content" jdbcType="VARCHAR" javaType="java.lang.String" />
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-        <result column="status" property="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
-        <result column="type" property="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="details" property="details" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="start_time" property="startTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
         <result column="end_time" property="endTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-        <result column="address" property="address" jdbcType="VARCHAR" javaType="java.lang.String" />
-        <result column="longitude" property="longitude" jdbcType="DOUBLE" javaType="java.lang.Double" />
-        <result column="latitude" property="latitude" jdbcType="DOUBLE" javaType="java.lang.Double" />
-        <result column="reward" property="reward" jdbcType="INTEGER" javaType="java.lang.Integer" />
-        <result column="comment" property="comment" jdbcType="VARCHAR" javaType="java.lang.String" />
-        <result column="comment_time" property="commentTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-        <result column="comment_user_id" property="commentUserId" jdbcType="INTEGER" javaType="java.lang.Integer" />
-        <result column="comment_user_name" property="commentUserName" jdbcType="VARCHAR" javaType="java.lang.String" />
-        <result column="comment_user_avatar" property="commentUserAvatar" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="status" property="status" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="time" property="time" jdbcType="TIME" javaType="java.sql.Time" />
+        <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+        <result column="location" property="location" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="attribute" property="attribute" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="need_pic" property="needPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="account" property="account" jdbcType="DOUBLE" javaType="java.lang.Double" />
     </resultMap>
 
+    <insert id="insertServeNeed" parameterType="com.noexp.timebank.entity.ServeNeed">
+        insert into timebank.ServeNeed(user_id, content, details, start_time, end_time, time, submit_time, location, attribute, need_pic, account)
+        values(#{userId}, #{content}, #{details}, #{startTime}, #{endTime}, #{time}, now(), #{location}, #{attribute}, #{needPic}, #{account})
+    </insert>
+
+    <select id="selectServeNeedById" resultMap="ServeNeedResultMap" parameterType="java.lang.Integer">
+        select * from timebank.ServeNeed where need_id = #{needId}
+    </select>
+
+    <select id="selectServeNeedsByUserId" resultMap="ServeNeedResultMap" parameterType="java.lang.Integer">
+        select * from timebank.ServeNeed where user_id = #{userId}
+    </select>
+
+    <select id="selectServeNeedByStatus" resultMap="ServeNeedResultMap" parameterType="java.lang.String">
+        select * from timebank.ServeNeed where status = #{status}
+    </select>
+
+    <select id="selectAllServeNeeds" resultMap="ServeNeedResultMap">
+        select * from timebank.ServeNeed
+    </select>
+
+    <update id="updateServeNeed" parameterType="com.noexp.timebank.entity.ServeNeed">
+        update timebank.ServeNeed set user_id = #{userId}, content = #{content}, details = #{details}, start_time = #{startTime}, end_time = #{endTime}, status = #{status}, time = #{time}, submit_time = #{submitTime}, location = #{location}, attribute = #{attribute}, need_pic = #{needPic}, account = #{account}
+        where need_id = #{needId}
+    </update>
+
+    <delete id="deleteServeNeedById" parameterType="java.lang.Integer">
+        delete from timebank.ServeNeed where need_id = #{needId}
+    </delete>
+
+    <select id="selectServeNeedsByLocation" resultMap="ServeNeedResultMap" parameterType="java.lang.String">
+        select * from timebank.ServeNeed where location = #{location}
+    </select>
+
+    <select id="selectServeNeedsByAttribute" resultMap="ServeNeedResultMap" parameterType="java.lang.String">
+        select * from timebank.ServeNeed where attribute = #{attribute}
+    </select>
+
+    <select id="selectServeNeedsByAccountRange" resultMap="ServeNeedResultMap" parameterType="java.lang.Double">
+        select * from timebank.ServeNeed where account between #{minAccount} and #{maxAccount}
+    </select>
+
+    <select id="selectServeNeedsBySubmitTimeRange" resultMap="ServeNeedResultMap" parameterType="java.util.Date">
+        select * from timebank.ServeNeed where submit_time between #{startTime} and #{endTime}
+    </select>
 </mapper>

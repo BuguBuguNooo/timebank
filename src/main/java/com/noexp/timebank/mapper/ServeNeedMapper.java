@@ -37,28 +37,28 @@ public interface ServeNeedMapper {
      * @param serveNeed 要插入的服务需求对象
      * @return 插入成功返回true，否则返回false
      */
-    boolean insertServeNeed(ServeNeed serveNeed);
+    int insertServeNeed(ServeNeed serveNeed);
 
     /**
      * 更新服务需求的信息
      * @param serveNeed 要更新的服务需求对象
      * @return 更新成功返回true，否则返回false
      */
-    boolean updateServeNeed(ServeNeed serveNeed);
+    int updateServeNeed(ServeNeed serveNeed);
 
     /**
      * 根据服务需求ID删除服务需求记录
      * @param needId 服务需求的ID
      * @return 删除成功返回true，否则返回false
      */
-    boolean deleteServeNeedById(@Param("needId") int needId);
+    int deleteServeNeedById(@Param("needId") int needId);
 
     /**
      * 根据服务需求的状态查询服务需求列表
      * @param status 服务需求的状态
      * @return 返回匹配的服务需求列表
      */
-    List<ServeNeed> selectServeNeedsByStatus(@Param("status") int status);
+    List<ServeNeed> selectServeNeedByStatus(@Param("status") String status);
 
     /**
      * 根据服务需求的地点查询服务需求列表

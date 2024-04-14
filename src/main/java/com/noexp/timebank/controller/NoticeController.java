@@ -6,9 +6,9 @@ import com.noexp.timebank.service.NoticeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author gefangjie
@@ -20,7 +20,7 @@ public class NoticeController {
     private NoticeService noticeService;
 
     //新增系统公告
-    @RequestMapping("/addNotice")
+    @PostMapping("/addNotice")
     public Result<String> addNotice(@RequestBody @Validated Notice notice) {
         int res =  noticeService.addNotice(notice);
         if (res == 1) {
@@ -30,7 +30,7 @@ public class NoticeController {
         }
     }
     //删除系统公告
-    @RequestMapping("/deleteNotice")
+    @DeleteMapping("/deleteNotice")
     public Result<String> deleteNotice(@Valid int noticeId) {
         int res =  noticeService.deleteNotice(noticeId);
         if (res == 1) {
@@ -40,7 +40,7 @@ public class NoticeController {
         }
     }
     //修改系统公告
-    @RequestMapping("/updateNotice")
+    @PatchMapping("/updateNotice")
     public Result<String> updateNotice(@RequestBody @Validated Notice notice) {
         int res =  noticeService.updateNotice(notice);
         if (res == 1) {
@@ -50,13 +50,13 @@ public class NoticeController {
         }
     }
     //查找所有系统公告
-    @RequestMapping("/findAllNotice")
-    public Result findAllNotice() {
+    @GetMapping("/findAllNotice")
+    public Result<List<Notice>> findAllNotice() {
         return Result.success(noticeService.findAllNotice());
     }
     //查找最新系统公告
-    @RequestMapping("/findNewNotice")
-    public Result findNewNotice() {
+    @GetMapping("/findNewNotice")
+    public Result<Notice> findNewNotice() {
         return Result.success(noticeService.findNewNotice());
     }
 
