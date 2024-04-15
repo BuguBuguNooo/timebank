@@ -1,6 +1,8 @@
 package com.noexp.timebank.service.Impl;
 
+import com.noexp.timebank.entity.ServeOrder;
 import com.noexp.timebank.entity.User;
+import com.noexp.timebank.mapper.ServeOrderMapper;
 import com.noexp.timebank.mapper.UserMapper;
 import com.noexp.timebank.service.UserService;
 import com.noexp.timebank.util.Md5Util;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,8 +19,14 @@ import java.util.Map;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    private final UserMapper userMapper;
+    private final ServeOrderMapper serveOrderMapper;
     @Autowired
-    private UserMapper userMapper;
+    public UserServiceImpl(UserMapper userMapper, ServeOrderMapper serveOrderMapper) {
+        this.userMapper = userMapper;
+        this.serveOrderMapper = serveOrderMapper;
+    }
+
     @Override
     public User findByUserName(String username) {
         //根据用户名查询用户
@@ -69,5 +78,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Double findAccountByUserId(Integer userId) {
         return userMapper.findAccountByUserId(userId);
+    }
+
+    @Override
+    public List<ServeOrder> queryServeOrderByUserId(Integer userId) {
+        return serveOrderMapper.queryServeOrderByGetId(userId);
     }
 }

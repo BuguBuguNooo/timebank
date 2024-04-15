@@ -8,7 +8,9 @@ import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-// 这是服务订单表的类
+/**
+ * @author gefangjie
+ */ // 这是服务订单表的类
 @Data
 @NoArgsConstructor
 @ToString
@@ -17,8 +19,8 @@ public class ServeOrder {
     private int serveId;
     // 服务订单ID：举例：1
     private Integer serveOrderId;
-    // 服务订单的发起者ID：举例：2
-    private Integer needId;
+    // 服务订单的接单者ID：举例：2
+    private Integer getId;
     // 服务订单的审核者ID：举例：3
     private Integer checkManId;
     // 服务订单的审核时间：举例：2021-06-01 12:00:00

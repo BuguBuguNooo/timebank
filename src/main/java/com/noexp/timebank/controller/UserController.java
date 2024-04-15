@@ -2,6 +2,7 @@ package com.noexp.timebank.controller;
 
 import com.noexp.timebank.annotation.UserRole;
 import com.noexp.timebank.entity.Result;
+import com.noexp.timebank.entity.ServeOrder;
 import com.noexp.timebank.service.UserService;
 import com.noexp.timebank.util.JwtUtil;
 import com.noexp.timebank.util.Md5Util;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import com.noexp.timebank.entity.User;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -144,5 +146,13 @@ public class UserController {
         Map<String, Object> map = ThreadLocalUtil.get();
         Integer userId = (Integer) map.get("userId");
         return Result.success(userService.findAccountByUserId(userId));
+    }
+
+    //查询用户接到的所有订单
+    @GetMapping("/getMyServeOrder")
+    public Result<List<ServeOrder>> queryServeOrderByUserId(){
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer userId = (Integer) map.get("userId");
+        return Result.success(userService.queryServeOrderByUserId(userId));
     }
 }

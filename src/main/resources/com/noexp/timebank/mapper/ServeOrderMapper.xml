@@ -7,7 +7,7 @@
     <resultMap id="ServeOrderResultMap" type="com.noexp.timebank.entity.ServeOrder">
         <id column="serve_id" property="serveId" jdbcType="INTEGER" javaType="int" />
         <result column="serve_order_id" property="serveOrderId" jdbcType="INTEGER" javaType="java.lang.Integer" />
-        <result column="need_id" property="needId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="get_id" property="getId" jdbcType="INTEGER" javaType="java.lang.Integer" />
         <result column="check_man_id" property="checkManId" jdbcType="INTEGER" javaType="java.lang.Integer" />
         <result column="check_time" property="checkTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
         <result column="confirm_time" property="confirmTime" jdbcType="TIME" javaType="java.sql.Time" />
@@ -23,8 +23,8 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" />
     </resultMap>
     <insert id="addServeOrder" parameterType="com.noexp.timebank.entity.ServeOrder">
-        insert into timebank.ServeOrder(timebank.ServeOrder.serve_order_id, timebank.ServeOrder.need_id, create_time, update_time)
-        values(#{serveOrderId}, #{needId}, now(), now())
+        insert into timebank.ServeOrder(timebank.ServeOrder.serve_order_id, timebank.ServeOrder.get_id, create_time, update_time)
+        values(#{serveOrderId}, #{getId}, now(), now())
     </insert>
 
     <select id="queryServeOrderById" resultMap="ServeOrderResultMap" parameterType="java.lang.Integer">
@@ -41,8 +41,8 @@
         <if test="provideId != null">
             provide_id = #{provideId},
         </if>
-        <if test="needId != null">
-            need_id = #{needId},
+        <if test="getId != null">
+            get_id = #{getId},
         </if>
         <if test="checkManId != null">
             check_man_id = #{checkManId},
@@ -83,4 +83,7 @@
         </if>
     </update>
 
+    <select id="queryServeOrderByGetId" resultMap="ServeOrderResultMap" parameterType="java.lang.Integer">
+        select * from timebank.ServeOrder where ServeOrder.get_id = #{getId}
+    </select>
 </mapper>

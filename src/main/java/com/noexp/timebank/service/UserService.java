@@ -1,6 +1,9 @@
 package com.noexp.timebank.service;
 
+import com.noexp.timebank.entity.ServeOrder;
 import com.noexp.timebank.entity.User;
+
+import java.util.List;
 
 /**
  * @author gefangjie
@@ -20,4 +23,6 @@ public interface UserService {
     int updateRole(String role, Integer userId);
     //根据用户ID查看账户信息
     Double findAccountByUserId(Integer userId);
+    //查询用户接到的所有订单
+    List<ServeOrder> queryServeOrderByUserId(Integer userId);
 }
