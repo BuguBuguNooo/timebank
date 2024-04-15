@@ -13,8 +13,8 @@ import java.util.Date;
 public class Check {
     // 审核ID
     private Integer checkId;
-    // 服务ID
-    private Integer serveId;
+    // 订单ID
+    private Integer orderID;
     // 审核人ID
     private Integer checkManId;
     // 审核状态

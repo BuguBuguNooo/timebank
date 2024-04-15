@@ -90,6 +90,8 @@ public interface ServeNeedMapper {
      */
     List<ServeNeed> selectServeNeedsByAccountRange(@Param("minAccount") double minAccount, @Param("maxAccount") double maxAccount);
 
-    // 修改服务需求的状态
+    // 修改服务需求的状态成为：待接受
     int updateServeNeedStatus(@Param("needId") int needId, @Param("status") String status);
+    // 修改服务需求的状态成为：已接受
+    int updateServeNeedStatusToAccepted(@Param("needId") int needId);
 }

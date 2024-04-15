@@ -5,7 +5,7 @@
 <mapper namespace="com.noexp.timebank.mapper.ServeNeedMapper">
 <!--    resultMap定义了如何从数据库结果集中来加载对象。-->
     <resultMap id="ServeNeedResultMap" type="com.noexp.timebank.entity.ServeNeed">
-        <id column="id" property="needId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <id column="need_id" property="needId" jdbcType="INTEGER" javaType="java.lang.Integer" />
         <result column="user_id" property="userId" jdbcType="INTEGER" javaType="java.lang.Integer" />
         <result column="content" property="content" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="details" property="details" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -81,6 +81,12 @@
     <update id="updateServeNeedStatus" parameterType="com.noexp.timebank.entity.ServeNeed">
         update timebank.ServeNeed
         set status = #{status}
+        where need_id = #{needId}
+    </update>
+
+    <update id="updateServeNeedStatusToAccepted" parameterType="com.noexp.timebank.entity.ServeNeed">
+        update timebank.ServeNeed
+        set status = '已接受'
         where need_id = #{needId}
     </update>
 </mapper>

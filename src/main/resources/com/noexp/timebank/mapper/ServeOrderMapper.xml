@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.noexp.timebank.mapper.ServeOrderMapper">
+    <!--    resultMap定义了如何从数据库结果集中来加载对象。-->
+    <resultMap id="ServeOrderResultMap" type="com.noexp.timebank.entity.ServeOrder">
+        <id column="serve_id" property="serveId" jdbcType="INTEGER" javaType="int" />
+        <result column="serve_order_id" property="serveOrderId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="need_id" property="needId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="check_man_id" property="checkManId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="check_time" property="checkTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+        <result column="confirm_time" property="confirmTime" jdbcType="TIME" javaType="java.sql.Time" />
+        <result column="self_report" property="selfReport" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="attached_pic" property="attachedPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="needed_report" property="neededReport" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="account" property="account" jdbcType="DOUBLE" javaType="java.lang.Double" />
+        <result column="status" property="status" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="attached_file" property="attachedFile" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="attached_pic_need" property="attachedPicNeed" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="attached_file_need" property="attachedFileNeed" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" />
+    </resultMap>
+    <insert id="addServeOrder" parameterType="com.noexp.timebank.entity.ServeOrder">
+        insert into timebank.ServeOrder(timebank.ServeOrder.serve_order_id, timebank.ServeOrder.need_id, create_time, update_time)
+        values(#{serveOrderId}, #{needId}, now(), now())
+    </insert>
+
+    <select id="queryServeOrderById" resultMap="ServeOrderResultMap" parameterType="java.lang.Integer">
+        select * from timebank.ServeOrder where ServeOrder.serve_id = #{orderId}
+    </select>
+
+    <delete id="deleteServeOrderById" parameterType="java.lang.Integer">
+        delete from timebank.ServeOrder where ServeOrder.serve_id = #{orderId}
+    </delete>
+
+    <update id="updateServeOrderById" parameterType="com.noexp.timebank.entity.ServeOrder">
+        UPDATE timebank.ServeOrder
+        SET
+        <if test="provideId != null">
+            provide_id = #{provideId},
+        </if>
+        <if test="needId != null">
+            need_id = #{needId},
+        </if>
+        <if test="checkManId != null">
+            check_man_id = #{checkManId},
+        </if>
+        <if test="checkTime != null">
+            check_time = #{checkTime},
+        </if>
+        <if test="confirmTime != null">
+            confirm_time = #{confirmTime},
+        </if>
+        <if test="selfReport != null">
+            self_report = #{selfReport},
+        </if>
+        <if test="attachedPic != null">
+            attached_pic = #{attachedPic},
+        </if>
+        <if test="neededReport != null">
+            needed_report = #{neededReport},
+        </if>
+        <if test="attachedPicNeed != null">
+            attached_pic_need = #{attachedPicNeed},
+        </if>
+        <if test="account != null">
+            account = #{account},
+        </if>
+        <if test="status != null">
+            status = #{status},
+        </if>
+        <if test="attachedFile != null">
+            attached_file = #{attachedFile},
+        </if>
+        <if test="attachedFileNeed != null">
+            attached_file_need = #{attachedFileNeed},
+        </if>
+        update_time = now()
+        <if test="serveId != null">
+            WHERE serve_id = #{serveId}
+        </if>
+    </update>
+
+</mapper>
