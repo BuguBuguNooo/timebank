@@ -141,7 +141,7 @@ public class ServeNeedController {
         int userId = (int) map.get("userId");
         try {
             // 更新需求状态
-            int i = serveNeedService.updateServeNeedStatusByUser(serveNeed.getNeedId());
+            int i = serveNeedService.updateServeNeedStatusByUser(serveNeed.getNeedId(), "已接单");
             // 添加订单信息
             int j = serveOrderService.addServeOrder(serveNeed.getNeedId(), userId);
 

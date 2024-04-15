@@ -14,7 +14,7 @@
         <result column="self_report" property="selfReport" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="attached_pic" property="attachedPic" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="needed_report" property="neededReport" jdbcType="VARCHAR" javaType="java.lang.String" />
-        <result column="account" property="account" jdbcType="DOUBLE" javaType="java.lang.Double" />
+        <result column="comfirmed_account" property="comfirmedAccount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
         <result column="status" property="status" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="attached_file" property="attachedFile" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="attached_pic_need" property="attachedPicNeed" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -35,55 +35,27 @@
         delete from timebank.ServeOrder where ServeOrder.serve_id = #{orderId}
     </delete>
 
-    <update id="updateServeOrderById" parameterType="com.noexp.timebank.entity.ServeOrder">
-        UPDATE timebank.ServeOrder
+    <select id="queryServeOrderByGetId" resultMap="ServeOrderResultMap" parameterType="java.lang.Integer">
+        select * from timebank.ServeOrder where ServeOrder.get_id = #{getId}
+    </select>
+
+    <update id="updateServeOrderByAcceptId" parameterType="com.noexp.timebank.entity.ServeOrder">
+        update timebank.ServeOrder
         SET
-        <if test="provideId != null">
-            provide_id = #{provideId},
-        </if>
-        <if test="getId != null">
-            get_id = #{getId},
-        </if>
-        <if test="checkManId != null">
-            check_man_id = #{checkManId},
-        </if>
-        <if test="checkTime != null">
-            check_time = #{checkTime},
-        </if>
-        <if test="confirmTime != null">
-            confirm_time = #{confirmTime},
-        </if>
         <if test="selfReport != null">
             self_report = #{selfReport},
         </if>
         <if test="attachedPic != null">
             attached_pic = #{attachedPic},
         </if>
-        <if test="neededReport != null">
-            needed_report = #{neededReport},
-        </if>
-        <if test="attachedPicNeed != null">
-            attached_pic_need = #{attachedPicNeed},
-        </if>
-        <if test="account != null">
-            account = #{account},
-        </if>
-        <if test="status != null">
-            status = #{status},
-        </if>
         <if test="attachedFile != null">
             attached_file = #{attachedFile},
         </if>
-        <if test="attachedFileNeed != null">
-            attached_file_need = #{attachedFileNeed},
+        <if test="comfirmedAccount != null">
+            comfirmed_account = #{comfirmedAccount},
         </if>
+            status = "已完成",
         update_time = now()
-        <if test="serveId != null">
-            WHERE serve_id = #{serveId}
-        </if>
+        WHERE serve_id = #{serveId}
     </update>
-
-    <select id="queryServeOrderByGetId" resultMap="ServeOrderResultMap" parameterType="java.lang.Integer">
-        select * from timebank.ServeOrder where ServeOrder.get_id = #{getId}
-    </select>
 </mapper>

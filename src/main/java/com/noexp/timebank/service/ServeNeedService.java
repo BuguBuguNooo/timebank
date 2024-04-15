@@ -31,6 +31,6 @@ public interface ServeNeedService {
     List<ServeNeed> getServeNeedsByTime(Date startTime, Date endTime);
     //修改服务需求状态：管理员审核
     int updateServeNeedStatus(String status, int needId);
-    //修改服务需求状态：用户接单
-    int updateServeNeedStatusByUser(int needId);
+    //修改服务需求状态
+    int updateServeNeedStatusByUser(int needId, String status);
 }

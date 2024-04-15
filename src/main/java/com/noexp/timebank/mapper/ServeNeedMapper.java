@@ -92,6 +92,6 @@ public interface ServeNeedMapper {
 
     // 修改服务需求的状态成为：待接受
     int updateServeNeedStatus(@Param("needId") int needId, @Param("status") String status);
-    // 修改服务需求的状态成为：已接受
-    int updateServeNeedStatusToAccepted(@Param("needId") int needId);
+    // 修改服务需求的状态成为：已接受/已完成
+    int updateServeNeedStatusToAccepted(@Param("needId") int needId,@Param("status")  String status);
 }

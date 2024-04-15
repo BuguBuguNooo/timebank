@@ -72,7 +72,7 @@ public class ServeNeedServiceImpl implements ServeNeedService {
     }
 
     @Override
-    public int updateServeNeedStatusByUser(int needId) {
-        return serveNeedMapper.updateServeNeedStatusToAccepted(needId);
+    public int updateServeNeedStatusByUser(int needId, String status) {
+        return serveNeedMapper.updateServeNeedStatusToAccepted(needId, status );
     }
 }

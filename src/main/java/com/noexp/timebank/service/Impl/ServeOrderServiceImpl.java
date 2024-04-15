@@ -22,12 +22,12 @@ public class ServeOrderServiceImpl implements ServeOrderService {
     }
 
     @Override
-    public int updateServeOrderById(ServeOrder serveOrder) {
-        return serveOrderMapper.updateServeOrderById(serveOrder);
+    public ServeOrder queryServeOrderById(Integer orderId) {
+        return serveOrderMapper.queryServeOrderById(orderId);
     }
 
     @Override
-    public ServeOrder queryServeOrderById(Integer orderId) {
-        return serveOrderMapper.queryServeOrderById(orderId);
+    public int updateServeOrderByAcceptId(ServeOrder serveOrder) {
+        return serveOrderMapper.updateServeOrderByAcceptId(serveOrder);
     }
 }

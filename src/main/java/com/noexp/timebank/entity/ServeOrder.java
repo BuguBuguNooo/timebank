@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -40,7 +41,7 @@ public class ServeOrder {
     //接单者自述附件
     private String attachedFile;
     //最终确认金额
-    private Double account;
+    private BigDecimal comfirmedAccount;
     // 服务订单的状态：有进行中、待审核、已完成、已取消等状态
     private String status;
     // 服务订单的提交时间：举例：2021-06-01 10:00:00

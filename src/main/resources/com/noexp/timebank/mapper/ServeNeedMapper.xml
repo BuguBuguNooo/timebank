@@ -86,7 +86,7 @@
 
     <update id="updateServeNeedStatusToAccepted" parameterType="com.noexp.timebank.entity.ServeNeed">
         update timebank.ServeNeed
-        set status = '已接受'
+        set status = #{status}
         where need_id = #{needId}
     </update>
 </mapper>
